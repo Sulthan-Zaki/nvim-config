@@ -49,15 +49,15 @@ return {
 			-- 1. Create capabilities with Blink
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities({}, false))
+			vim.lsp.config('*', {
+				capabilities = capabilities,
+			})
 			-- 2. Set default config for all servers
 			-- vim.lsp.enable("lua_ls")
 			-- vim.lsp.enable("gopls")
 			-- vim.lsp.enable("pyright")
 			-- vim.lsp.enable("html")
 			-- vim.lsp.enable("ts_ls")
-			vim.lsp.config('*',{
-				capabilities = capabilities,
-			})
 		end,
 	}
 }

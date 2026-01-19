@@ -26,11 +26,17 @@ return {
 			})
 			-- Static guides (ibl) color
 			-- Current scope (mini) color
-			vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { fg = "#9F63FF", bold = true })
+			vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { fg = "#9F63FF" })
 			vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbolOff', { link = 'MiniIndentscopeSymbol' })
 			require('mini.ai').setup()
 			require('mini.surround').setup()
-			require('mini.comment').setup()
+			require('mini.comment').setup({
+				options = {
+					custom_commentstring = function()
+						return require('ts_context_commentstring').calculate_commentstring() or vim.bo.commentstring
+					end,
+				},
+			})
 			require('mini.pairs').setup()
 		end
 	}
